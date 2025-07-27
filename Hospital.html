@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Grama Chikitsa - Health Helper</title>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script type="text/javascript" src="JQuery/jquery.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f2f2f2;
+      padding: 20px;
+      text-align: center;
+    }
+
+    h1 {
+      color: #2e7d32;
+    }
+
+    select {
+      padding: 10px;
+      font-size: 1rem;
+      margin-top: 20px;
+    }
+
+    .info-box {
+      margin-top: 20px;
+      padding: 20px;
+      background: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      display: none;
+      text-align: left;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .info-box h3 {
+      color: #1565c0;
+    }
+
+    .footer {
+      margin-top: 50px;
+      font-size: 0.9rem;
+      color: gray;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🩺 Grama Chikitsa</h1>
+  <p>Select your symptom to see basic health advice</p>
+
+  <select id="symptom">
+    <option value="">-- Choose Symptom --</option>
+    <option value="fever">Fever</option>
+    <option value="cough">Cough</option>
+    <option value="headache">Headache</option>
+    <option value="stomach">Stomach Pain</option>
+    <option value="cold">Cold / Sneezing</option>
+  </select>
+
+  <div class="info-box" id="output">
+    <h3 id="symptomTitle"></h3>
+    <p><strong>Home Remedy:</strong> <span id="remedy"></span></p>
+    <p><strong>Doctor Visit:</strong> <span id="doctorAdvice"></span></p>
+    <p><strong>Nearest Health Center:</strong><br>
+    Grama PHC, Near Temple Street, Village Main Road<br>
+    📞 Contact: 1800-112-233</p>
+  </div>
+
+  <div class="footer">Designed for rural wellness ❤</div>
+
+  <script>
+    const data = {
+      fever: {
+        remedy: "Use cool cloth on forehead, drink warm water, take rest.",
+        doctor: "Visit doctor if fever lasts more than 2 days or is above 102°F."
+      },
+      cough: {
+        remedy: "Drink honey with warm water, avoid cold items.",
+        doctor: "Visit doctor if cough is dry and lasts more than 1 week."
+      },
+      headache: {
+        remedy: "Rest in a dark room, apply cool pack on forehead.",
+        doctor: "Visit doctor if headache is severe or recurring."
+      },
+      stomach: {
+        remedy: "Drink jeera or ginger water, avoid oily foods.",
+        doctor: "Visit doctor if pain is sharp or with vomiting."
+      },
+      cold: {
+        remedy: "Steam inhalation with eucalyptus oil, drink warm water.",
+        doctor: "See doctor if cold continues for more than 4 days."
+      }
+    };
+
+    $('#symptom').change(function() {
+      const value = $(this).val();
+      if (data[value]) {
+        $('#symptomTitle').text(value.charAt(0).toUpperCase() + value.slice(1));
+        $('#remedy').text(data[value].remedy);
+        $('#doctorAdvice').text(data[value].doctor);
+        $('#output').slideDown();
+      } else {
+        $('#output').slideUp();
+      }
+    });
+  </script>
+</body>
+</html>
